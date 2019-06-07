@@ -1,0 +1,13 @@
+
+.edit-ship-floor {
+  border: 1px solid #ddd;
+  padding: 1em;
+  grid-gap: 1em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+}
+
+.floor-grid {
+  grid-column: 1/4;
+}

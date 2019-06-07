@@ -1,0 +1,26 @@
+.ship-edit {
+
+  &__header {
+    margin-bottom: 1em;
+  }
+
+  &__body{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+  }
+
+  &__name {
+
+  }
+
+  &__description {
+    & textarea {
+      height: 30px;
+    }
+  }
+
+  &__floors {
+    grid-column: 1/3;
+  }
+}
