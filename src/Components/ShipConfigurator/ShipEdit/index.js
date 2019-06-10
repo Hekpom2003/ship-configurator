@@ -28,7 +28,7 @@ class ShipEdit extends React.Component {
 
         </div>
         <div className="ship-edit__body">
-
+          
           <div className="ship-edit__name">
             <label htmlFor="shipName">Название корабля</label>
             <input type="text"

@@ -1,0 +1,42 @@
+.counter-input {
+	display: inline-flex;
+	background: #b5a477;
+	input {
+		display: block;
+		width: 35px;
+		text-align: center;
+	}
+	
+	&__buttons {
+		display: flex;
+		flex-direction: column;
+		
+		div {
+			display: flex;
+			font-weight: bold;
+			padding: 3px;
+			justify-content: center;
+			align-items: center;
+			height: 10px;
+			background: #000;
+			color: #FFF;
+			
+			user-select: none;
+			
+			cursor: pointer;
+			
+			&:hover {
+				color: #000;
+				background: #FFF;
+			}
+		}
+		
+		&-increase {
+		
+		}
+		
+		&-decrease {
+		
+		}
+	}
+}
