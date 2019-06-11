@@ -1,5 +1,4 @@
 import React from 'react';
-import EditFloor from './EditFloor';
 import './style.scss';
 import { connect } from 'react-redux';
 import { SHIP_EDIT__SET_ITEM } from '../../../constants/shipEdit';

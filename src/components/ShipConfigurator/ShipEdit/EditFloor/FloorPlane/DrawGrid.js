@@ -1,34 +1,48 @@
 import React from 'react';
 
 class DrawGrid extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
 
-    let grid = [];
+    this._getSvgDimention = this._getSvgDimention.bind(this);
+    this._getGridData = this._getGridData.bind(this);
+  }
 
-    const {floorGrid,cellStyle,tileSize} = this.props;
+  _getSvgDimention() {
+    const { image } = this.props;
+    return image;
+  }
 
+  _getGridData() {
 
-    for (let row = 0; row < floorGrid.rows; row++) {
-      for (let col = 0; col < floorGrid.cols; col++) {
+    const { gridMatrix, image, gridOffset } = this.props;
 
-        // Сдвиг для группы
-        const translate = (col * tileSize.width) + ',' + (row * tileSize.height);
-
-        // Путь тайла
-        const path = 'M 0,0 H' + tileSize.width + ' V' + tileSize.height + ' H0 L0,0';
-
-        const cell = <g transform={'translate(' + translate + ')'} key={translate}>
-          <path d={path} {...cellStyle} />
-        </g>;
-
-        grid.push(cell);
+    return {
+      basePoint: [gridOffset.left, gridOffset.top],
+      tiles: {
+        rows: gridMatrix.length,
+        cols: gridMatrix[0].length,
       }
     }
+  }
+
+  render() {
+
+    console.log('DrawGrid', this.props);
+
+    const grid = this._getGridData();
+
+    const svg = this._getSvgDimention();
 
     return (
-      <g id={"grid"} transform={'translate(' + this.props.containerOffset + ')'}>
-        {grid}
-      </g>
+      <svg viewBox={'0 0 ' + svg.width + ' ' + svg.height} width={svg.width} height={svg.height}>
+        <g id={"grid"} transform={'translate(' + grid.basePoint.join(',') + ')'}>
+          {
+            //TODO stopHere
+            // this.props.gridMatrix.map((row, rowKey) => row.map((ceil,colKey)=>));
+          }
+        </g>
+      </svg>
     );
   }
 }
