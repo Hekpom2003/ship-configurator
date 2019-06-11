@@ -23,33 +23,49 @@ const initialState = [
           {
             id: 1,
             name: 'captain',
-            x: 1,
-            y: 1,
-            width: 2,
-            height: 2,
-            service: true,
-            roomClass: 11
+            path: [
+              "0,0",
+              "0,20.714285714285715",
+            ],
+            /**
+             * serviceSpace - Служебное помещение,
+             * class1,
+             * class2,
+             * class3,
+             */
+            roomClass: 'serviceSpace',
           },
           {
             id: 2,
-            name: 'rb0',
-            x: 10,
-            y: 1,
-            width: 2,
-            height: 2,
-            service: false,
-            roomClass: 42
+            name: 'captain',
+            path: ["174.23076923076923,0"],
+            /**
+             * serviceSpace - Служебное помещение,
+             * class1,
+             * class2,
+             * class3,
+             */
+            roomClass: 'class1',
+
           },
           {
             id: 3,
-            name: 'rb1',
-            x: 20,
-            y: 4,
-            width: 2,
-            height: 2,
-            service: false,
-            roomClass: 42
-          }
+            name: 'captain',
+            path: [
+              "406.53846153846155,62.142857142857146",
+              "435.5769230769231,62.142857142857146",
+            ],
+            /**
+             * serviceSpace - Служебное помещение,
+             * class1,
+             * class2,
+             * class3,
+             */
+            roomClass: 'class2',
+
+          },
+
+
         ]
 
       }

@@ -33,8 +33,6 @@ class ShipEditComponent extends React.Component {
 
   render() {
 
-    console.log(this.props);
-
     return (
       <div className="ship-edit">
         <div className="ship-edit__header">
@@ -61,7 +59,11 @@ class ShipEditComponent extends React.Component {
 
           <div className="ship-edit__floors">
             {
-              this.props.shipFloors.map(item => <EditFloor key={item.id} {...item}/>)
+              this.props.shipFloors.map(
+                (item, key) => <EditFloor key={item.id}
+                                          floor={item}
+                                          floorKey={key}/>
+              )
             }
           </div>
 
@@ -75,7 +77,7 @@ class ShipEditComponent extends React.Component {
 const mapStateProp = state => ({
   shipName: state.shipEdit.name,
   shipDescription: state.shipEdit.description,
-  shipFloors:state.shipEdit.floors,
+  shipFloors: state.shipEdit.floors,
 });
 
 const mapDispachProps = dispatch => {
