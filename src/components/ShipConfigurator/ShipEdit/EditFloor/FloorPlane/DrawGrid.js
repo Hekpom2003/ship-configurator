@@ -34,11 +34,7 @@ class DrawGrid extends React.Component {
 
   render() {
 
-    console.log('DrawGrid', this.props);
-
     const grid = this._getGridData();
-
-    console.log('grid', grid);
 
     const svg = this._getSvgDimention();
 
@@ -49,8 +45,15 @@ class DrawGrid extends React.Component {
             this.props.gridMatrix.map(
               (row, rowKey) => row.map(
                 (roomId, colKey) => {
+
+                  let isActiveRoom = '';
+                  if (this.props.activeRoom) {
+                    isActiveRoom = (+this.props.activeRoom === roomId) ? '' : 'is-opacity-50';
+                  }
+
                   return <DrawGridElement
                     key={rowKey + colKey}
+                    isActiveRoom={isActiveRoom}
                     room={this.props.rooms[roomId]}
                     tiles={grid.tiles}
                     rowKey={rowKey}

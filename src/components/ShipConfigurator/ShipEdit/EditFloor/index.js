@@ -22,15 +22,23 @@ class EditFloor extends React.Component {
         width: 1055,
         height: 160,
       },
+
       rooms: this.props.floor.rooms,
+
+      activeRoom: false,
     };
 
   }
 
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    console.table ('componentDidUpdate',{nextState,state:this.state});
+  }
 
   render() {
 
     const { floorKey } = this.props;
+
+    console.log('activeRoom', this.state.activeRoom);
 
     return (
       <div className="ship-floor">
@@ -50,9 +58,13 @@ class EditFloor extends React.Component {
                     floorKey={floorKey}
                     _onChangeState={obj => this.setState(obj)}/>
 
-        <RoomInfo/>
+        <RoomInfo room={this.state.rooms[this.state.activeRoom]}
+                  id={this.state.activeRoom}
+        />
 
-        <RoomsList/>
+        <RoomsList rooms={this.state.rooms}
+                   activeRoom={this.state.activeRoom}
+                   _onChangeState={obj => this.setState(obj)}/>
       </div>
     );
   }

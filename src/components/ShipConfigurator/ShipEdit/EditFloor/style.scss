@@ -23,3 +23,46 @@
   }
 }
 
+.ship-floor-rooms-list {
+  background-color: $grey-light;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(10, 1fr);
+  padding: 0.5em;
+
+  &__item {
+    border: 1px solid $grey;
+    padding: 0.5em 1.25em;
+    transition: 0.3s ease all;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+
+    &.is-active,
+    &:hover {
+      background-color: $primary-color;
+      border: $primary-color;
+      color: white;
+    }
+
+  }
+}
+
+
+.is-opacity-50 {
+  opacity: 0.5;
+}
+
+.room-class {
+  &--serviceSpace {
+    fill: white
+  }
+
+  &--class1{
+    fill: yellow;
+  }
+
+  &--class2{
+    fill: yellowgreen;
+  }
+}

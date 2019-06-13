@@ -53,8 +53,6 @@ class FloorGrid extends React.Component {
     const rows = gridMatrix.length;
     const cols = gridMatrix[0].length;
 
-    console.table('gridMatrix',gridMatrix);
-
     return (
       <div className="ship-floor__grid">
         <CounterInput

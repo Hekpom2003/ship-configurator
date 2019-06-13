@@ -32,7 +32,7 @@ const initialState = [
         rooms: {
           1:{
             id: 1,
-            name: 'captain',
+            name: 'СП',
             /**
              * serviceSpace - Служебное помещение,
              * class1,
@@ -55,7 +55,7 @@ const initialState = [
           },
           3:{
             id: 3,
-            name: 'captain',
+            name: 'Каюта',
             /**
              * serviceSpace - Служебное помещение,
              * class1,
