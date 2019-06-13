@@ -30,10 +30,6 @@ class EditFloor extends React.Component {
 
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {
-    console.table ('componentDidUpdate',{nextState,state:this.state});
-  }
-
   render() {
 
     const { floorKey } = this.props;

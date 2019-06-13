@@ -7,11 +7,33 @@ class DrawGrid extends React.Component {
 
     this._getSvgDimention = this._getSvgDimention.bind(this);
     this._getGridData = this._getGridData.bind(this);
+    this._setRoomCoords = this._setRoomCoords.bind(this);
   }
 
   _getSvgDimention() {
     const { image } = this.props;
     return image;
+  }
+
+  /**
+   * Если у нас активен режим редактирования проверяем можем ли мы манипулировать в текущей ячейкой
+   * Если выключен - смотрим попали ли мы на каюту - если да - включаем режим редактирования
+   */
+  _setRoomCoords(coord) {
+
+
+
+    const { gridMatrix } = this.props;
+
+    if (this.props.activeRoom) {
+    } else {
+
+      const roomId = gridMatrix[coord.x][coord.y];
+
+      if (roomId !== 0) {
+        this.props._onChangeState({ activeRoom: roomId });
+      }
+    }
   }
 
   _getGridData() {
@@ -45,19 +67,15 @@ class DrawGrid extends React.Component {
             this.props.gridMatrix.map(
               (row, rowKey) => row.map(
                 (roomId, colKey) => {
-
-                  let isActiveRoom = '';
-                  if (this.props.activeRoom) {
-                    isActiveRoom = (+this.props.activeRoom === roomId) ? '' : 'is-opacity-50';
-                  }
-
                   return <DrawGridElement
                     key={rowKey + colKey}
-                    isActiveRoom={isActiveRoom}
+                    isActiveRoom={this.props.activeRoom}
                     room={this.props.rooms[roomId]}
+                    roomId={roomId}
                     tiles={grid.tiles}
                     rowKey={rowKey}
                     colKey={colKey}
+                    _onClickEvent={obj => this._setRoomCoords(obj)}
                   />
                 }))
           }

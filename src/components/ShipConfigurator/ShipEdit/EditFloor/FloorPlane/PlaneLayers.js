@@ -6,7 +6,7 @@ class PlaneLayers extends React.Component {
     return (
       <div className="ship-floor-plane__layer">
         <img src={this.props.floorPlanImage} alt=""/>
-          <DrawGrid {...this.props} />
+          <DrawGrid {...this.props}  _onChangeState={obj => this.props._onChangeState(obj)} />
       </div>
     );
   }

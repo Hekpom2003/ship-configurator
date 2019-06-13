@@ -11,7 +11,7 @@ class FloorPlane extends React.Component{
     return (
       <div className="ship-floor__plane ship-floor-plane">
 
-        <PlaneLayers {...this.props}/>
+        <PlaneLayers {...this.props} _onChangeState={obj => this.props._onChangeState(obj)}/>
 
         <div className="ship-floor-plane__offset-top">
           <CounterInput
