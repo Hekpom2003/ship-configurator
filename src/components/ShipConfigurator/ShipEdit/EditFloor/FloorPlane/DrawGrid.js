@@ -1,4 +1,5 @@
 import React from 'react';
+import DrawGridElement from './DrawGridElement';
 
 class DrawGrid extends React.Component {
   constructor(props) {
@@ -17,11 +18,16 @@ class DrawGrid extends React.Component {
 
     const { gridMatrix, image, gridOffset } = this.props;
 
+    const cols = gridMatrix[0].length;
+    const rows = gridMatrix.length;
+
     return {
       basePoint: [gridOffset.left, gridOffset.top],
       tiles: {
-        rows: gridMatrix.length,
-        cols: gridMatrix[0].length,
+        rows,
+        cols,
+        width: (image.width - (gridOffset.left + gridOffset.right)) / cols,
+        height: (image.height - (gridOffset.top + gridOffset.bottom)) / rows,
       }
     }
   }
@@ -32,14 +38,25 @@ class DrawGrid extends React.Component {
 
     const grid = this._getGridData();
 
+    console.log('grid', grid);
+
     const svg = this._getSvgDimention();
 
     return (
       <svg viewBox={'0 0 ' + svg.width + ' ' + svg.height} width={svg.width} height={svg.height}>
         <g id={"grid"} transform={'translate(' + grid.basePoint.join(',') + ')'}>
           {
-            //TODO stopHere
-            // this.props.gridMatrix.map((row, rowKey) => row.map((ceil,colKey)=>));
+            this.props.gridMatrix.map(
+              (row, rowKey) => row.map(
+                (roomId, colKey) => {
+                  return <DrawGridElement
+                    key={rowKey + colKey}
+                    room={this.props.rooms[roomId]}
+                    tiles={grid.tiles}
+                    rowKey={rowKey}
+                    colKey={colKey}
+                  />
+                }))
           }
         </g>
       </svg>
