@@ -30,6 +30,32 @@ class EditFloor extends React.Component {
 
     this._saveRoom = this._saveRoom.bind(this);
     this._deleteRoom = this._deleteRoom.bind(this);
+    this._addNewRoom = this._addNewRoom.bind(this);
+
+  }
+
+  _addNewRoom(){
+    let {rooms} = this.state;
+
+    let firstKey ;
+
+    for (let prop in rooms){
+      firstKey = prop;
+      break;
+    }
+
+
+    let room = {...rooms[firstKey]};
+
+    for (let key in room){
+      room[key] = '';
+    }
+    room.id = Object.keys(this.state.rooms).length + 1;
+    room.name = 'Новая каюта';
+
+    rooms[room.id] = room;
+
+    this.setState({rooms,activeRoom:room.id});
 
   }
 
@@ -61,8 +87,6 @@ class EditFloor extends React.Component {
 
     const { floorKey } = this.props;
 
-    console.table('activeRoom', this.state.activeRoom);
-
     return (
       <div className="ship-floor">
         <FloorName floorKey={floorKey}
@@ -92,7 +116,9 @@ class EditFloor extends React.Component {
 
         <RoomsList rooms={this.state.rooms}
                    activeRoom={this.state.activeRoom}
-                   _onChangeState={obj => this.setState(obj)}/>
+                   _onChangeState={obj => this.setState(obj)}
+                   _addNewRoom={()=>this._addNewRoom()}
+        />
       </div>
     );
   }

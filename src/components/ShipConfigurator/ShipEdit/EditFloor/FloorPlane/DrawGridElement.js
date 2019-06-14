@@ -37,8 +37,6 @@ class DrawGridElement extends React.Component {
       path = [];
       for (let pathItem of arPath) {
 
-        console.log({ arPath, groupBasePoint });
-
         let startPoint = {
           x: pathItem[0] - groupBasePoint.x,
           y: pathItem[1] - groupBasePoint.y,
@@ -46,16 +44,14 @@ class DrawGridElement extends React.Component {
 
         // itemStart = itemStart.join(',');
 
-        let itemPath = 'M' + startPoint.x * tiles.width + ',' + startPoint.y * tiles.height ;
+        let itemPath = 'M' + startPoint.x * tiles.width + ',' + startPoint.y * tiles.height;
         itemPath += ' H' + (startPoint.x + 1) * tiles.width;
         itemPath += " V" + (startPoint.y + 1) * tiles.height;
         itemPath += " H" + startPoint.x * tiles.width;
-        itemPath += "L" + startPoint.x * tiles.width + ',' + startPoint.y * tiles.height ;
+        itemPath += "L" + startPoint.x * tiles.width + ',' + startPoint.y * tiles.height;
 
-        path.push(<path d={itemPath}/>);
+        path.push(<path key={startPoint.x + ',' + startPoint.y} d={itemPath}/>);
       }
-
-
 
 
       return (

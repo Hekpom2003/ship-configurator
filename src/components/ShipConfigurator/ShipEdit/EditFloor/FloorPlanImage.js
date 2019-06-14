@@ -13,7 +13,6 @@ class FloorPlanImage extends React.Component{
   }
 
   _onChangeState(obj){
-    console.log(obj);
     this.props._onChangeState(obj);
     this.setState(obj);
   }

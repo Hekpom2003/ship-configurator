@@ -22,7 +22,10 @@ class RoomsList extends React.Component {
     return (
       <div className="ship-floor__rooms-list ship-floor-rooms-list">
         {roomsList}
-        <button className="ship-floor-rooms-list__item">Добавить каюту</button>
+        <button className="ship-floor-rooms-list__item"
+                onClick={() => this.props._addNewRoom()}>Добавить каюту
+        </button>
+
       </div>
     );
   }

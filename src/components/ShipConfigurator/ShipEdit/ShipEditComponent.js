@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SHIP_EDIT__SET_ITEM,
   SHIP_EDIT__SET_SHIP_NAME,
-  SHIP_EDIT__SET_SHIP_DESCRIPTION
+  SHIP_EDIT__SET_SHIP_DESCRIPTION, SHIP_EDIT__ADD_FLOOR
 } from '../../../constants/shipEdit';
 import { connect } from 'react-redux';
 import EditFloor from './EditFloor';
@@ -18,6 +18,7 @@ class ShipEditComponent extends React.Component {
 
     this.onChangeShipName = this.onChangeShipName.bind(this);
     this.onChangeShipDescription = this.onChangeShipDescription.bind(this);
+    this.onAddShipFloor = this.onAddShipFloor.bind(this);
   }
 
   onChangeShipName(shipName) {
@@ -30,9 +31,30 @@ class ShipEditComponent extends React.Component {
     this.setState({ shipDescription });
   }
 
+  onAddShipFloor() {
+
+    let { shipFloors } = this.props;
+
+    const floor = {
+      gridMatrix: [[0]],
+      gridOffset: { top: 0, left: 0, right: 0, bottom: 0 },
+      id: shipFloors.length + 1,
+      image: false,
+      name: "Новая палуба",
+      planImage: false,
+      rooms: {},
+    };
+
+    shipFloors.push(floor);
+
+    this.props._addShipFloor(shipFloors);
+
+    //TODO Костыль, какого-то хрена не обновляется состояние компоненты
+    this.setState({ shipName: this.state.shipName });
+
+  }
 
   render() {
-
     return (
       <div className="ship-edit">
         <div className="ship-edit__header">
@@ -60,11 +82,11 @@ class ShipEditComponent extends React.Component {
           <div className="ship-edit__floors">
             {
               this.props.shipFloors.map(
-                (item, key) => <EditFloor key={item.id}
-                                          floor={item}
-                                          floorKey={key}/>
+                (item, key) => <EditFloor key={key} floor={item} floorKey={key}/>
               )
             }
+
+            <button onClick={this.onAddShipFloor}>Добавить палубу</button>
           </div>
 
         </div>
@@ -74,11 +96,13 @@ class ShipEditComponent extends React.Component {
 }
 
 
-const mapStateProp = state => ({
-  shipName: state.shipEdit.name,
-  shipDescription: state.shipEdit.description,
-  shipFloors: state.shipEdit.floors,
-});
+const mapStateProp = state => {
+  return {
+    shipName: state.shipEdit.name,
+    shipDescription: state.shipEdit.description,
+    shipFloors: state.shipEdit.floors,
+  }
+};
 
 const mapDispachProps = dispatch => {
   return {
@@ -88,6 +112,8 @@ const mapDispachProps = dispatch => {
       type: SHIP_EDIT__SET_SHIP_DESCRIPTION,
       payload: shipDescription
     }),
+
+    _addShipFloor: shipFloors => dispatch({ type: SHIP_EDIT__ADD_FLOOR, payload: shipFloors }),
 
   }
 };

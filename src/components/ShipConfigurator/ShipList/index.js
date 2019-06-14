@@ -7,7 +7,6 @@ import { SHIP_EDIT__SET_ITEM } from '../../../constants/shipEdit';
 
 class ShipList extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <div className={'ships-list'}>
         <div className="ships-list__header">

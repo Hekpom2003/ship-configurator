@@ -89,7 +89,6 @@ class DrawGrid extends React.Component {
       this.props._onChangeState({ gridMatrix });
 
     } else {
-      console.log('клик по другой каюте ничего не будем делать');
       return false;
     }
   }
