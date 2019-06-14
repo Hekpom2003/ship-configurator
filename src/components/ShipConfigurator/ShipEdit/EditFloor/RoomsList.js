@@ -6,17 +6,15 @@ class RoomsList extends React.Component {
     let roomsList = [];
 
     for (let roomId in this.props.rooms) {
-      if (this.props.rooms.hasOwnProperty('roomId')) {
-        const item = this.props.rooms[roomId];
+      const item = this.props.rooms[roomId];
 
-        const isActive = (this.props.activeRoom === +roomId) ? 'is-active' : '';
+      const isActive = (this.props.activeRoom === +roomId) ? 'is-active' : '';
 
-        roomsList.push(
-          <button className={"ship-floor-rooms-list__item " + isActive}
-                  key={item.id}
-                  onClick={() => this.props._onChangeState({ activeRoom: (isActive) ? false : roomId })}
-          >{item.name}</button>);
-      }
+      roomsList.push(
+        <button className={"ship-floor-rooms-list__item " + isActive}
+                key={item.id}
+                onClick={() => this.props._onChangeState({ activeRoom: (isActive) ? false : roomId })}
+        >{item.name}</button>);
     }
 
 
