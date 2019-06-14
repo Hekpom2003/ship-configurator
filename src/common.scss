@@ -1,0 +1,10 @@
+$FontPathOpenSans: "~npm-font-open-sans/fonts";
+@import '~npm-font-open-sans/open-sans';
+
+@import "~bootstrap/scss/bootstrap-grid";
+
+body {
+  font-family: "Open Sans",sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}

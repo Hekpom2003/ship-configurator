@@ -3,18 +3,24 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './store';
-import { BrowserRouter as Router , Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ShipList from './components/ShipConfigurator/ShipList';
 import ShipEdit from './components/ShipConfigurator/ShipEdit';
+
+import 'normalize.css';
+import './common.scss';
+import Header from './components/Header/Header';
 
 // import dataFromServer from './dataFromServer';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route exact path="/ship-configurator/" component={ShipList} />
-      <Route path="/ship-configurator/edit-ship/:shipId/" component={ShipEdit} />
-      <Route path="/ship-configurator/cruise-edit/:shipId/" component={ShipList} />
+      <Header/>
+
+      <Route exact path="/ship-configurator/" component={ShipList}/>
+      <Route path="/ship-configurator/edit-ship/:shipId/" component={ShipEdit}/>
+      <Route path="/ship-configurator/cruise-edit/:shipId/" component={ShipList}/>
     </Router>
   </Provider>,
   document.getElementById('root'));
