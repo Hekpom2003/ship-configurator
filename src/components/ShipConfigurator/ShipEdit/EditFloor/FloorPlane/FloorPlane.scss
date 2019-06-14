@@ -1,0 +1,74 @@
+@import "../../../../../vars";
+
+.ship-floor-plane {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  grid-template-rows: 40px 1fr 40px;
+
+  &__layer {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    svg{
+      position: absolute;
+      //background-color: #00000033;
+    }
+  }
+
+  &__offset-top {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__offset-left {
+    grid-row: 2/3;
+    grid-column: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .counter-input {
+      transform: rotateZ(-90deg);
+    }
+  }
+
+  &__offset-right {
+    grid-row: 2/3;
+    grid-column: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .counter-input {
+      transform: rotateZ(-90deg);
+
+    }
+  }
+
+  &__offset-bottom {
+    grid-row: 3/4;
+    grid-column: 2/3;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+
+.room-class {
+  &--empty-ceil {
+    fill: #ddd;
+    stroke: #888888;
+    opacity: 0.7;
+  }
+}
