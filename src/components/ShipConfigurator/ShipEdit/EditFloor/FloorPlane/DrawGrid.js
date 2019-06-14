@@ -11,8 +11,7 @@ class DrawGrid extends React.Component {
   }
 
   _getSvgDimention() {
-    const { image } = this.props;
-    return image;
+    return this.props.image;
   }
 
   /**
@@ -20,8 +19,6 @@ class DrawGrid extends React.Component {
    * Если выключен - смотрим попали ли мы на каюту - если да - включаем режим редактирования
    */
   _setRoomCoords(coord) {
-
-
 
     const { gridMatrix } = this.props;
 
@@ -60,6 +57,8 @@ class DrawGrid extends React.Component {
 
     const svg = this._getSvgDimention();
 
+    // console.log('DrawGrid',this.props.activeRoom);
+
     return (
       <svg viewBox={'0 0 ' + svg.width + ' ' + svg.height} width={svg.width} height={svg.height}>
         <g id={"grid"} transform={'translate(' + grid.basePoint.join(',') + ')'}>
@@ -69,7 +68,7 @@ class DrawGrid extends React.Component {
                 (roomId, colKey) => {
                   return <DrawGridElement
                     key={rowKey + colKey}
-                    isActiveRoom={this.props.activeRoom}
+                    activeRoom={this.props.activeRoom}
                     room={this.props.rooms[roomId]}
                     roomId={roomId}
                     tiles={grid.tiles}

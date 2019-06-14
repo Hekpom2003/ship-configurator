@@ -14,6 +14,8 @@ class DrawGridElement extends React.Component {
 
     let isActiveRoom = '';
 
+    // console.log('DrawGridElement', {a:this.props.activeRoom ,b: this.props.roomId});
+
     if (this.props.activeRoom) {
       isActiveRoom = (+this.props.activeRoom === this.props.roomId) ? '' : 'is-opacity-50';
     }

@@ -6,7 +6,7 @@ import {
 
 const initialState = {};
 
-export default function filter(state = initialState, action) {
+export default function shipEdit(state = initialState, action) {
   switch (action.type) {
     case SHIP_EDIT__SET_ITEM:
       return { ...action.payload };

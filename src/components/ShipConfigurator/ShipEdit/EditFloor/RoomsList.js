@@ -8,6 +8,7 @@ class RoomsList extends React.Component {
     for (let roomId in this.props.rooms) {
       const item = this.props.rooms[roomId];
 
+
       const isActive = (this.props.activeRoom === +roomId) ? 'is-active' : '';
 
       roomsList.push(

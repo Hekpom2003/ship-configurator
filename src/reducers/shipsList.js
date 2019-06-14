@@ -78,6 +78,6 @@ const initialState = [
   },
 ];
 
-export default function filter(state = initialState, action) {
+export default function shipList(state = initialState, action) {
   return state;
 }

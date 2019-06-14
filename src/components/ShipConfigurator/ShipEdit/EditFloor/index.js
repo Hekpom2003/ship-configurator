@@ -28,13 +28,40 @@ class EditFloor extends React.Component {
       activeRoom: false,
     };
 
+    this._saveRoom = this._saveRoom.bind(this);
+    this._deleteRoom = this._deleteRoom.bind(this);
+
   }
+
+  _saveRoom(id, data) {
+    let { rooms } = this.state;
+    rooms[id] = data;
+    this.setState({ rooms, activeRoom: false })
+  }
+
+  _deleteRoom(roomId) {
+    const { rooms, gridMatrix } = this.state;
+
+    // удаляем из объекта комнат
+    delete rooms[roomId];
+
+    // удаляем из сетки комнат
+
+    gridMatrix.map((row, rowKey) => row.map((tail, colKey) => {
+      if (tail === +roomId) {
+        gridMatrix[rowKey][colKey] = 0;
+      }
+    }));
+
+    this.setState({ rooms, gridMatrix, activeRoom: false });
+  }
+
 
   render() {
 
     const { floorKey } = this.props;
 
-    console.log('activeRoom', this.state.activeRoom);
+    console.table('activeRoom', this.state.activeRoom);
 
     return (
       <div className="ship-floor">
@@ -52,10 +79,15 @@ class EditFloor extends React.Component {
 
         <FloorPlane {...this.state}
                     floorKey={floorKey}
-                    _onChangeState={obj => this.setState(obj)}/>
+                    _onChangeState={obj => this.setState(obj)}
+        />
 
         <RoomInfo room={this.state.rooms[this.state.activeRoom]}
                   id={this.state.activeRoom}
+                  key={this.state.activeRoom}
+                  _onChangeState={obj => this.setState(obj)}
+                  _saveRoom={(id, data) => this._saveRoom(id, data)}
+                  _deleteRoom={(id) => this._deleteRoom(id)}
         />
 
         <RoomsList rooms={this.state.rooms}
