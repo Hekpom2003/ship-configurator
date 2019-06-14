@@ -2,32 +2,87 @@ import React from 'react';
 
 class DrawGridElement extends React.Component {
 
+  _getGroupTranslate(arPath) {
+    let result = {
+      x: Number.MAX_SAFE_INTEGER,
+      y: Number.MAX_SAFE_INTEGER,
+    };
+
+    for (let item of arPath) {
+      result.x = Math.min(result.x, item[0]);
+      result.y = Math.min(result.y, item[1]);
+    }
+
+    return result;
+  }
+
   render() {
 
-    const { tiles, rowKey, colKey, room, roomId } = this.props;
-
-    const path = 'M0,0 H' + tiles.width + " V" + tiles.height + "H0 L0,0";
-
-    const translate = (colKey * tiles.width) + ',' + (rowKey * tiles.height);
+    const { tiles, rowKey, colKey, room, roomId, arPath } = this.props;
 
     const roomClass = 'room-class--' + ((room === undefined) ? 'empty-ceil' : room.roomClass);
 
     let isActiveRoom = '';
-
-    // console.log('DrawGridElement', {a:this.props.activeRoom ,b: this.props.roomId});
-
     if (this.props.activeRoom) {
       isActiveRoom = (+this.props.activeRoom === this.props.roomId) ? '' : 'is-opacity-50';
     }
 
+    let path, translate;
 
-    return (
-      <g transform={"translate(" + translate + ")"}
-         className={roomClass + ' ' + isActiveRoom}
-         onClick={() => this.props._onClickEvent({ x: rowKey, y: colKey })}>
-        <path d={path}/>
-      </g>
-    );
+    if (roomId !== 0 && arPath.length > 0) {
+      const groupBasePoint = this._getGroupTranslate(arPath);
+
+      translate = (groupBasePoint.x * tiles.width) + ',' + (groupBasePoint.y * tiles.height);
+
+      path = [];
+      for (let pathItem of arPath) {
+
+        console.log({ arPath, groupBasePoint });
+
+        let startPoint = {
+          x: pathItem[0] - groupBasePoint.x,
+          y: pathItem[1] - groupBasePoint.y,
+        };
+
+        // itemStart = itemStart.join(',');
+
+        let itemPath = 'M' + startPoint.x * tiles.width + ',' + startPoint.y * tiles.height ;
+        itemPath += ' H' + (startPoint.x + 1) * tiles.width;
+        itemPath += " V" + (startPoint.y + 1) * tiles.height;
+        itemPath += " H" + startPoint.x * tiles.width;
+        itemPath += "L" + startPoint.x * tiles.width + ',' + startPoint.y * tiles.height ;
+
+        path.push(<path d={itemPath}/>);
+      }
+
+
+
+
+      return (
+        <g transform={"translate(" + translate + ")"}
+           className={roomClass + ' ' + isActiveRoom}
+           onClick={() => this.props._onClickEvent({ x: rowKey, y: colKey })}>
+          {path}
+
+          <text x="2" y="16" fill={'black'}>{room.name}</text>
+        </g>
+      );
+
+
+    } else {
+      path = 'M0,0 H' + tiles.width + " V" + tiles.height + "H0 L0,0";
+      translate = (colKey * tiles.width) + ',' + (rowKey * tiles.height);
+
+      return (
+        <g transform={"translate(" + translate + ")"}
+           className={roomClass + ' ' + isActiveRoom}
+           onClick={() => this.props._onClickEvent({ x: rowKey, y: colKey })}>
+          <path d={path}/>
+        </g>
+      );
+    }
+
+
   }
 }
 
