@@ -10,6 +10,8 @@ import ShipEdit from './components/ShipConfigurator/ShipEdit';
 import 'normalize.css';
 import './common.scss';
 import Header from './components/Header/Header';
+import Navigation from './components/Navigation/Navigation';
+import Page404 from './components/Pages/Page404/Page404';
 
 // import dataFromServer from './dataFromServer';
 
@@ -17,10 +19,13 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Header/>
-
-      <Route exact path="/ship-configurator/" component={ShipList}/>
-      <Route path="/ship-configurator/edit-ship/:shipId/" component={ShipEdit}/>
-      <Route path="/ship-configurator/cruise-edit/:shipId/" component={ShipList}/>
+      <Navigation/>
+      <Route path="/ship-configurator/">
+        <Route exact path={'/'} component={ShipList}/>
+        <Route path="edit-ship/:shipId/" component={ShipEdit}/>
+        <Route path="/ship-configurator/cruise-edit/:shipId/" component={ShipList}/>
+      </Route>
+      {/*<Route component={Page404}/>*/}
     </Router>
   </Provider>,
   document.getElementById('root'));
