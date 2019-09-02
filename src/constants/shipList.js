@@ -1,0 +1,1 @@
+export const SHIP_LIST_SET_DATA = 'SHIP_LIST_SET_DATA'; //добавление этажа

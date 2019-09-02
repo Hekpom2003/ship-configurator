@@ -8,6 +8,7 @@ import ShipList from './components/ShipConfigurator/ShipList';
 import ShipEdit from './components/ShipConfigurator/ShipEdit';
 import RouteForUsersWithRole from './components/Auth/RouteForUsersWithRole';
 import LoginPage from './components/Auth/LoginPage'
+import LoadAndCheckAuthorizationData from './components/Auth/LoadAndCheckAuthorizationData';
 
 
 import 'normalize.css';
@@ -24,45 +25,47 @@ import Page404 from './components/Pages/Page404/Page404';
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
-			<Header auth={store.getState().authentication}/>
-			<Navigation/>
-			
-			
-			<Switch>
+		<LoadAndCheckAuthorizationData>
+			<BrowserRouter>
+				<Header auth={store.getState().authentication}/>
+				<Navigation/>
 				
-				{/*<IsAuth>
+				
+				<Switch>
+					
+					{/*<IsAuth>
 					{siteMap.map(item=>{
 						if (item.group === user.group){
 							return <Route path={item.path} component={item.component}/>
 						}
 					})}
 				</IsAuth>*/}
-				
-				
-				<Route path="/ship-configurator/">
-					<RouteForUsersWithRole role="client" mode="redirect" exact path={'/ship-configurator/'} component={ShipList}/>
-					<RouteForUsersWithRole role="client" mode="redirect" path="/ship-configurator/edit-ship/:shipId/" component={ShipEdit}/>
-					<RouteForUsersWithRole role="client" mode="redirect" path="/ship-configurator/cruise-edit/:shipId/"
-					                   component={ShipList}/>
-				</Route>
-				
-				<Route path="/user-account/">
-					<RouteForUsersWithRole role="passenger" mode="redirect" exact path={'/user-account/'} component={IndexForPassengers}/>
-					<Route path="/user-account/login/" component={LoginPage}/>
-				</Route>
-				
-				<Route exact path='/'>
-					<RouteForUsersWithRole role="client" mode="hide-dont-redirect" component={IndexForClients}/>
-					<RouteForUsersWithRole role="passenger" mode="hide-dont-redirect" component={IndexForPassengers}/>
-					<RouteForUsersWithRole role="unauthorized" mode="hide-dont-redirect" component={IndexForUnauthorized}/>
-				</Route>
-				
-				
-				<Route component={Page404}/>
-			</Switch>
-		
-		</BrowserRouter>
+					
+					
+					<Route path="/ship-configurator/">
+						<RouteForUsersWithRole role="client" mode="redirect" exact path={'/ship-configurator/'} component={ShipList}/>
+						<RouteForUsersWithRole role="client" mode="redirect" path="/ship-configurator/edit-ship/:shipId/" component={ShipEdit}/>
+						<RouteForUsersWithRole role="client" mode="redirect" path="/ship-configurator/cruise-edit/:shipId/"
+						                       component={ShipList}/>
+					</Route>
+					
+					<Route path="/user-account/">
+						<RouteForUsersWithRole role="passenger" mode="redirect" exact path={'/user-account/'} component={IndexForPassengers}/>
+						<Route path="/user-account/login/" component={LoginPage}/>
+					</Route>
+					
+					<Route exact path='/'>
+						<RouteForUsersWithRole role="client" mode="hide-dont-redirect" component={IndexForClients}/>
+						<RouteForUsersWithRole role="passenger" mode="hide-dont-redirect" component={IndexForPassengers}/>
+						<RouteForUsersWithRole role="unauthorized" mode="hide-dont-redirect" component={IndexForUnauthorized}/>
+					</Route>
+					
+					
+					<Route component={Page404}/>
+				</Switch>
+			
+			</BrowserRouter>
+		</LoadAndCheckAuthorizationData>
 	</Provider>,
 	document.getElementById('root'));
 

@@ -34,7 +34,6 @@ class RouteForUsersWithRole extends React.Component {
 					}
 					// client role. The one, who own ships.
 					else if (role === 'client') {
-						console.log('RCC');
 						if (authentication.auth && authentication.isClient) {
 							return (<Component {...props} />);
 						} else {
@@ -65,6 +64,26 @@ class RouteForUsersWithRole extends React.Component {
 										state: {
 											referrer: document.location.pathname,
 											requiredRole: role
+										}
+									}}/>
+								);
+							} else {
+								return (null);
+							}
+						}
+					}
+					//authorised to any group. Probably preferred over "passenger" role
+					else if (role === 'authorized') {
+						if (authentication.auth) {
+							return (<Component {...props} />);
+						} else {
+							if (mode === 'redirect') {
+								return (
+									<Redirect to={{
+										pathname: '/user-account/login/',
+										state: {
+											referrer: document.location.pathname,
+											requiredRole: null
 										}
 									}}/>
 								);

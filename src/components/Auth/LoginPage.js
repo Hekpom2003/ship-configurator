@@ -36,12 +36,9 @@ class LoginPage extends React.Component {
 							return <WrongRoleError/>;
 						}
 					
+					// any role
 					default:
-						if (!this.props.authentication.isPassenger && this.props.authentication.isClient) {
-							return <Redirect to={targetUrl}/>
-						} else {
-							return <WrongRoleError/>;
-						}
+						return <Redirect to={targetUrl}/>
 				}
 				
 				
